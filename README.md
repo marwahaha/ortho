@@ -1,50 +1,56 @@
 ortho
 =====
 
-Application ludique pour enfants pour répéter des mots d'orthographe. Ecrit en python avec wxPython.
+This is a educational application for children within 6 to 12 years old.  The goal is to help the kid to learn the spelling of new words. 
 
-Principe de l'application
--------------------------
+The application is written in python and uses wxPython.
 
-Des mots sont énoncé par l'application, l'élève doit les écrire sans faute. Des mots peuvent facilement être rajoutés, il suffit de rajouter les fichiers son (.wav) dans le bon répertoire.
+Application's principles
+------------------------
 
-Deux modes sont sont disponibles:  
+The application dictates words, the kid has to type it correctly. New words can easily be added by copying new sound files (.wav) within the appropriate folder.
 
- -  le mode interrogation où la correction est réalisée à la fin des mots (le nombre de mots par interro est configurable).
- -  le mode entrainement où toute erreur est immédiatement signalée à l'élève afin qu'il puisse se corriger de suite.
+The application has two way of working:
+ - the quiz mode: the correction is performed at the end of the quiz (the number of word per quiz is configurable).
+ - the training mode: any mistake is directly reported to the user, so that he can correct himself on the spot.
  
- 
-Comment installer et démarrer l'application?
---------------------------------------------
+How to install and start the application?
+-----------------------------------------
 
-L'application fonctionne sous Linux et sous Windows.
+The application runs on Linux and Windows.
 
 ### Linux
 
-Au préalable, il faut avoir installé: python, python-wxgtk2.8 ("wxPython") et pygame.
-Sous Debian et Ubuntu, la commande suivante installe ces dépendances:
+python, python-wxgtk2.8 ("wxPython") and pygame must be installed.
+For Debian and Ubuntu, the following command installs the dependencies:
 
     apt-get install python python-wxgtk2.8 python-pygame
 
-Pour lancer l'application, il suffit de cliquer sur le fichier `launch_ortho.py`, ou de lancer dans un terminal:
+To run the application, simply click on the file `launch_ortho.py`, or launch in a terminal:
 
     python launch_ortho.py
 
 ### Windows
 
-Il faut installer:
+First, install: 
 
 * [Python](http://www.python.org)
 * [wxPython](http://www.wxpython.org)
 
-Pour lancer l'application, il faut exécuter dans un terminal: `python launch_ortho.py`.
+To run the application, execute in a terminal: `python launch_ortho.py`.
 
 
 TODO
 ----
 
- * Augmenter la base de mots
- * Proposer une méthode d'installation pour simple pour Linux et Windows. 
-   - Windows: peut-être convertir le script en un exécutable?
-   - Linux: proposer un packet `.deb`
- * Idée: explorer si le principe de l'application ne peut pas être intégré dans une autre application existante, telle que [gcompris](http://www.gcompris.net)
+ * Log files: 1 debug log and one parental (or teacher) log ("application log")
+ * when changing the lessons or the mode, "reset" the interface and the state of the application
+ * at the end of an interrogation, list the correct words in the textpanel
+ * When closing the application, display a specific window with score & faults
+ * TECHOS: enhance the way the lessons are managed in GuiGlue
+ * TECHOS: why on Linux, the menu bar is not showing up at the start of the application?
+ * Add new words
+ * Facilitate the installation on Linux and Windows:
+   - Windows: convert the script into an executable?
+   - Linux: create a package `.deb`
+ * Idea: explore whether the application can be integrated within an existing educational suite, like [gcompris](http://www.gcompris.net)
