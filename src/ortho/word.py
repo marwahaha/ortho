@@ -37,9 +37,9 @@ class Word():
         else:
             if pygame.mixer.music.get_busy():
                 #pygame.mixer.music.queue(self.file.encode('latin1'))
-                pygame.mixer.music.queue(self.file)
+                pygame.mixer.music.queue(self.file.encode('UTF-8'))
             else:
                 #pygame.mixer.music.load(self.file.encode('latin1'))
-                pygame.mixer.music.load(self.file)
+                pygame.mixer.music.load(self.file.encode('UTF-8'))
                 pygame.mixer.music.play()
     
