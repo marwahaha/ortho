@@ -70,7 +70,7 @@ class Quiz():
         # Avoid infinite loop if too much words are requested.
         if self.length > len(self.full_words):
             self.length = len(self.full_words) 
-        local_full_words = self.full_words
+        local_full_words = self.full_words[:]
         while (len(self.words) < self.length):
             new_word = random.choice(local_full_words)
             self.words.append(new_word)
