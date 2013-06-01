@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random, os
+import logging
 from lesson import Lesson
 
 class Quiz():
@@ -22,21 +23,25 @@ class Quiz():
         self.words = []
         self.full_words = [] #complete list of all words from all lessons (used for infinite quiz)
         self.iter_index = -1
+        self.techLogger = logging.getLogger('techLog')
+
     
     def add_lesson(self, name, path=os.getcwdu()):
-        print "addLesson"
         if isinstance(name, Lesson):
+            self.techLogger.debug("adding lesson object: %s, path: %s" % (name.name, name.path))
             self.lessons.add(name)
             self.lessonsNames.add(name.name)
         else:
             #we consider name is the name of the lesson, and thus the directory.
+            self.techLogger.debug("creating a lesson before adding it: %s, path: %s" % (name, path))
             lesson = Lesson(name, path)
-            self.lessons.add(lesson)
-            self.lessonsNames.add(lesson.name)
+            self.add_lesson(lesson)
     def remove_lesson(self, lesson):
+	self.techLogger.debug("Trying to remove lesson %s" % lesson.name)
         if (lesson in self.lessons):
             self.lessonsNames.discard(lesson.name)
             self.lessons.remove(lesson)
+	    self.techLogger.debug("Lesson '%s' removed!" % lesson.name)
             
     def __iter__(self):
         """
@@ -48,9 +53,12 @@ class Quiz():
     def next(self):
         self.iter_index = self.iter_index + 1
         if self.iter_index >= len(self.words):
+	    self.techLogger.debug("End of the list of word reached!")
             raise StopIteration
-        return self.words[self.iter_index]
-    
+        word =  self.words[self.iter_index]
+        self.techLogger("Next word chosen is: %s" % word)
+        return word
+
     def get_next_word(self):
         index = 0
         while index < len(self.words):
@@ -65,7 +73,7 @@ class Quiz():
         self.full_words = []
         for lesson in self.lessons:
             self.full_words += lesson.words
-        
+        self.techLogger.debug("Full list of words: %s" % ", ".join([s.word for s in self.full_words]))
         self.words = []
         # Avoid infinite loop if too much words are requested.
         if self.length > len(self.full_words):
@@ -75,10 +83,13 @@ class Quiz():
             new_word = random.choice(local_full_words)
             self.words.append(new_word)
             local_full_words.remove(new_word)
+	self.techLogger.debug("List of words in the quiz (length: %d): %s" % (len(self.words), ", ".join([w.word for w in self.words])))
         return self.words
     
     def get_random_word(self):
-        return random.choice(self.full_words)
+        word  = random.choice(self.full_words)
+        self.techLogger.debug("New word chosen: %s" % word.word)
+        return word
     
     def __unicode__(self):
         return "\n".join([unicode(w) for w in self.words])

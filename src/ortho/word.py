@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import platform
 #platform.system() is either Windows or Linux
+import logging
 
 if platform.system() == 'Windows':
     osName = 'Windows'
@@ -19,9 +20,10 @@ class Word():
     def __init__(self, word, file_name):
         self.word = word
         self.file = file_name
-        # print "New word created: %s" % self.word
+        self.techLogger = logging.getLogger('techLog')
        
     def is_answer_correct(self, answer):
+        self.techLogger.debug("Is anwer correct? answer: %s, word: %s" % (answer, self.word))
         if (answer.strip() == self.word):
             return True
         else:
@@ -32,6 +34,7 @@ class Word():
     
     
     def play(self):
+        self.techLogger.debug("Playing word: %s (path: %s)" % (self.word, self.file))
         if osName == 'Windows':
             winsound.PlaySound(self.file.encode('latin1'), winsound.SND_FILENAME)
         else:
