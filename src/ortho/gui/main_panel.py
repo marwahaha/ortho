@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import wx
+import os #for os.path
 from ortho.gui.gui_glue import GuiGlue
 from lessons_selector_dialog import LessonsSelectorDialog
 from ortho import Word #for playing "bravo" sound
@@ -37,8 +38,8 @@ class MainPanel(wx.Panel):
         self.timer = wx.Timer(self, -1)
         self.redStyle = wx.TextAttr(wx.RED)
         self.greenStyle = wx.TextAttr(wx.Colour(0,255,0))
-        self.bravoSound = Word("bravo", "resources/bravo.wav")
-        self.errorSound = Word("error", "resources/error.wav")
+        self.bravoSound = Word("bravo", os.path.normpath(os.path.dirname(__file__) + "/../../resources/bravo.wav"))
+        self.errorSound = Word("error", os.path.normpath(os.path.dirname(__file__) + "/../../resources/error.wav"))
         self.gg = GuiGlue() #singleton
         
     def __set_properties(self):

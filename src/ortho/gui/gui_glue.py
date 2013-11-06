@@ -18,7 +18,7 @@ class GuiGlue:
             self.length = 10
         if not hasattr(self, 'mode'):
             self.mode = 1 #Training mode by default
-        self.lessonsPath = os.path.normpath(os.getcwdu() +  "/resources/lessons/")
+        self.lessonsPath = os.path.normpath(os.path.dirname(__file__) +  "/../../resources/lessons/")
     
     def searchLessons(self, basePath=None):
         """
