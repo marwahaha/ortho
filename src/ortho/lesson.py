@@ -17,6 +17,7 @@ class Lesson():
     def __init__(self, name, path=None):
         self.name = name
         self.words = [] #list of Word objects
+        self.word_list_file = "words.list" #CSV mapping audio file to word
         self.path = path
         if path is not None:
             self.load()
@@ -28,12 +29,24 @@ class Lesson():
         """
         if self.path is None:
             return False
-        for file in os.listdir(self.path):
-            full_file_name = os.path.join(self.path, file)
-            if (os.path.isfile(full_file_name) and 
-                os.path.splitext(file)[1] == ".wav"):
-                word_name = os.path.splitext(file)[0]
-                self.words.append(Word(word_name,full_file_name))
+        if (os.path.exists(os.path.join(self.path, self.word_list_file))):
+            #new loading method with a words.list
+		    ifile = open(os.path.join(self.path, self.word_list_file), "r")
+		    for line in ifile:
+			    s = line.split(";")
+			    word_name = s[1].strip().decode('utf-8')
+			    full_file_name = os.path.join(self.path, s[0].decode('utf-8'))
+			    print "Filename: " + full_file_name
+			    print "Word: " + word_name
+			    self.words.append(Word(word_name,full_file_name))			
+    	else:
+    	    #legacy loading method, kept for backward compatibility
+            for file in os.listdir(self.path):
+                full_file_name = os.path.join(self.path, file)
+                if (os.path.isfile(full_file_name) and 
+                    os.path.splitext(file)[1] == ".wav"):
+                    word_name = os.path.splitext(file)[0]
+                    self.words.append(Word(word_name,full_file_name))
         return True
     
     def __unicode__(self):

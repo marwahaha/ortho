@@ -21,7 +21,7 @@ class OrthoApp(wx.App):
     def _initLog(self):
         self.techLogger = logging.getLogger('techLog')
         self.techLogger.setLevel(logging.DEBUG)
-        fh = logging.FileHandler('OrthoApp_debug.log', encoding="iso-8859-15")
+        fh = logging.FileHandler('OrthoApp_debug.log', encoding='utf-8')
         fh.setLevel(logging.DEBUG)
         formatter = logging.Formatter('%(asctime)s - %(filename)s - %(funcName)s() - %(levelname)s: %(message)s')
         fh.setFormatter(formatter)

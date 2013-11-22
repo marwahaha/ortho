@@ -18,6 +18,7 @@ else:
 
 class Word():
     def __init__(self, word, file_name):
+        # word and file_name are supposed to be unicode
         self.word = word
         self.file = file_name
         self.techLogger = logging.getLogger('techLog')
