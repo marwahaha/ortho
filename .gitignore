@@ -4,6 +4,8 @@
 *.swp
 # C extensions
 *.so
+# gedit backup
+*~
 
 # Packages
 *.egg
