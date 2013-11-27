@@ -7,25 +7,18 @@
 
 import wx
 import ortho.gui
+from ortho.gui.gui_glue import GuiGlue
 import logging
 
 class OrthoApp(wx.App):
     def OnInit(self):
         # wx.InitAllImageHandlers()
-        self._initLog()
+        self.gg = GuiGlue() #singleton
+        self.gg.initConfig()
         myMainFrame = ortho.gui.MainFrame(None, -1, "")
         self.SetTopWindow(myMainFrame)
         myMainFrame.Show()
         return 1
-       
-    def _initLog(self):
-        self.techLogger = logging.getLogger('techLog')
-        self.techLogger.setLevel(logging.DEBUG)
-        fh = logging.FileHandler('OrthoApp_debug.log', encoding='utf-8')
-        fh.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - %(filename)s - %(funcName)s() - %(levelname)s: %(message)s')
-        fh.setFormatter(formatter)
-        self.techLogger.addHandler(fh)
     
 if __name__ == "__main__":
     myApp = OrthoApp(0)
