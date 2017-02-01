@@ -1,3 +1,6 @@
+*[Abandonned project - Experimental code]*
+
+*For an efficient card-based learning app, consider using [Anki](https://apps.ankiweb.net/).*
 ortho
 =====
 
